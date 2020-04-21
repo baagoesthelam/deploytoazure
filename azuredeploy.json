@@ -8,10 +8,6 @@
         "cosmosLocation": {
             "type": "string"
         },
-        "cosmosTier": {
-            "type": "string",
-            "defaultValue": "Standard"
-        },
         "bcMemberPassword": {
             "type": "securestring",
             "metadata": {
@@ -46,7 +42,7 @@
                         "locationName": "[parameters('cosmosLocation')]"
                     }
                 ],
-                "databaseAccountOfferType": "[parameters('cosmosTier')]"
+                "databaseAccountOfferType": "Standard"
             }
         },
         {
