@@ -31,20 +31,45 @@
 
   },
   "resources": [
-    {
-      "type": "Microsoft.DocumentDB/databaseAccounts",
-      "apiVersion": "2016-03-31",
-      "name": "[variables('cosmosAccountName')]",
-      "location": "[parameters('cosmosLocation')]",
-      "properties": {
-        "locations": [
-          {
-            "locationName": "[parameters('cosmosLocation')]"
-          }
-        ],
-        "databaseAccountOfferType": "Standard"
-      }
-    },
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts",
+            "apiVersion": "2020-03-01",
+            "name": "[variables('cosmosAccountName')]",
+            "location": "[parameters('cosmosLocation')]",
+            "tags": {
+                "defaultExperience": "Azure Cosmos DB for MongoDB API",
+                "hidden-cosmos-mmspecial": "",
+                "CosmosAccountType": "Non-Production"
+            },
+            "kind": "MongoDB",
+            "properties": {
+                "publicNetworkAccess": "Enabled",
+                "enableAutomaticFailover": false,
+                "enableMultipleWriteLocations": false,
+                "isVirtualNetworkFilterEnabled": false,
+                "virtualNetworkRules": [],
+                "disableKeyBasedMetadataWriteAccess": false,
+                "databaseAccountOfferType": "Standard",
+                "consistencyPolicy": {
+                    "defaultConsistencyLevel": "Session",
+                    "maxIntervalInSeconds": 5,
+                    "maxStalenessPrefix": 100
+                },
+                "locations": [
+                    {
+                        "locationName": "[parameters('cosmosLocation')]",
+                        "provisioningState": "Succeeded",
+                        "failoverPriority": 0,
+                        "isZoneRedundant": false
+                    }
+                ],
+                "capabilities": [
+                    {
+                        "name": "EnableMongo"
+                    }
+                ]
+            }
+        },
     {
       "type": "Microsoft.Blockchain/blockchainMembers",
       "apiVersion": "2018-06-01-preview",
